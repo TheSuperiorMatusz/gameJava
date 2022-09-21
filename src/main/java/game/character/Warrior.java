@@ -1,5 +1,8 @@
 package game.character;
 
+import game.commander.Damage;
+import game.commander.SimpleDamage;
+
 public class Warrior {
     private int healthBar;
     private final int attackDamage;
@@ -28,9 +31,12 @@ public class Warrior {
         return healthBar;
     }
 
-    public int getAHit(int damage){
-        int newHealthBar= this.healthBar-damage;
-        this.setHealthBar(newHealthBar);
-        return damage;
+    public void hit(Warrior opponent){
+        opponent.receiveDamage(new SimpleDamage(getAttackDamage(),this));
+    }
+
+    protected int receiveDamage(Damage damage){
+        setHealthBar(healthBar-damage.getValue());
+        return damage.getValue();
     }
 }

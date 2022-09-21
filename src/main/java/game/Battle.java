@@ -10,7 +10,7 @@ public class Battle {
        Warrior attacker = warrior1;
        Warrior defender = warrior2;
        while (attacker.isAlive()){
-           defender.getAHit(attacker.getAttackDamage());
+           attacker.hit(defender);
            Warrior swap = attacker;
            attacker = defender;
            defender = swap;
@@ -24,9 +24,9 @@ public class Battle {
        Warrior warriorDefending = armyDefending.peek();
 
        while (true){
-          boolean isFirstWarriorWin =fight(warriorAttacking,warriorDefending);
+          boolean isFirstWarriorWinner =fight(warriorAttacking,warriorDefending);
 
-           if(isFirstWarriorWin){
+           if(isFirstWarriorWinner){
                armyDefending.remove();
                warriorDefending = armyDefending.peek();
            }else {

@@ -2,6 +2,7 @@ package game;
 
 import game.character.Defender;
 import game.character.Knight;
+import game.character.Vampire;
 import game.character.Warrior;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -111,13 +112,11 @@ class BattleTest {
     @DisplayName("Night fight")
     void testfight9(){
         var unit_1 = new Defender();
-        var unit_2 = new Rookie();
+        var unit_2 = new Vampire();
         var unit_3 = new Warrior();
 
-        Battle.fight(unit_1,unit_2);
-        boolean isUnit1WinSecondBattle = Battle.fight(unit_1,unit_3);
 
-        assertTrue(isUnit1WinSecondBattle);
+        assertTrue( Battle.fight(unit_1,unit_2));
     }
 
     @ParameterizedTest
@@ -177,6 +176,38 @@ class BattleTest {
         nineteenthArmy.addUnits(Warrior::new,1);
         nineteenthArmy.addUnits(Defender::new,1);
         twentythArmy.addUnits(Warrior::new,5);
+        Army twentyFirst = new Army();
+        Army twentyTwo = new Army();
+        twentyFirst.addUnits(Defender::new,5);
+        twentyFirst.addUnits(Vampire::new,6);
+        twentyFirst.addUnits(Warrior::new,7);
+        twentyTwo.addUnits(Warrior::new,6);
+        twentyTwo.addUnits(Defender::new,6);
+        twentyTwo.addUnits(Vampire::new,6);
+        Army twentyThird = new Army();
+        Army twentyFourth = new Army();
+        twentyThird.addUnits(Defender::new,2);
+        twentyThird.addUnits(Vampire::new,3);
+        twentyThird.addUnits(Warrior::new,4);
+        twentyFourth.addUnits(Warrior::new,4);
+        twentyFourth.addUnits(Defender::new,4);
+        twentyFourth.addUnits(Vampire::new,3);
+        Army twentyFifth = new Army();
+        Army twentySixt = new Army();
+        twentyFifth.addUnits(Defender::new,11);
+        twentyFifth.addUnits(Vampire::new,3);
+        twentyFifth.addUnits(Warrior::new,4);
+        twentySixt.addUnits(Warrior::new,4);
+        twentySixt.addUnits(Defender::new,4);
+        twentySixt.addUnits(Vampire::new,13);
+        Army twentySeventh = new Army();
+        Army twentyEight = new Army();
+        twentySeventh.addUnits(Defender::new,9);
+        twentySeventh.addUnits(Vampire::new,3);
+        twentySeventh.addUnits(Warrior::new,8);
+        twentyEight.addUnits(Warrior::new,4);
+        twentyEight.addUnits(Defender::new,4);
+        twentyEight.addUnits(Vampire::new,13);
 
         return Stream.of(
                 Arguments.of(firstArmy,secondArmy,false),
@@ -188,7 +219,11 @@ class BattleTest {
                 Arguments.of(thirteenthArmy,fourteenthArmy,true),
                 Arguments.of(fiftteenthArmy,sixteenthArmy,true),
                 Arguments.of(seventeenthArmy,eighteemteenth,true),
-                Arguments.of(nineteenthArmy,twentythArmy,false)
+                Arguments.of(nineteenthArmy,twentythArmy,false),
+                Arguments.of(twentyFirst, twentyTwo,false),
+                Arguments.of(twentyThird, twentyFourth,false),
+                Arguments.of(twentyFifth,twentySixt,true),
+                Arguments.of(twentySeventh,twentyEight,true)
         );
     }
 }

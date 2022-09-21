@@ -1,5 +1,7 @@
 package game.character;
 
+import game.commander.Damage;
+
 public class Defender extends Warrior{
     private static final int DEFENSE = 2;
 
@@ -8,12 +10,10 @@ public class Defender extends Warrior{
     }
 
     @Override
-    public int getAHit(int damage) {
-         int realDamage = damage - DEFENSE;
-         if(realDamage>0){
-             int newHealthBar = this.getHealthBar() - realDamage;
-             this.setHealthBar(newHealthBar);
-             return realDamage;
+    protected int receiveDamage(Damage damage) {
+         if( damage.getValue() - DEFENSE > 0){
+             damage.setValue(damage.getValue()-DEFENSE);
+             return super.receiveDamage(damage);
          }else {
              return 0;
          }

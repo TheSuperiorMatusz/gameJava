@@ -1,15 +1,24 @@
 package game.character;
 
+import game.commander.SimpleDamage;
+
 public class Vampire extends Warrior{
-    private static final double VAMPIRISM = 0.5;
+    private static final int VAMPIRISM = 50;
     private static final int MAX_HEALTH_BAR = 40;
     public Vampire() {
         super(40,4);
     }
 
     @Override
-    public int getAHit(int damage) {
-        super.getAHit(damage);
-        return 0;
+    public void hit(Warrior opponent) {
+        int damageTooponent =opponent.receiveDamage(new SimpleDamage(getAttackDamage(),this));
+        int addHealth = (int)((double) damageTooponent * (double) VAMPIRISM/100);
+        if(getHealthBar()<MAX_HEALTH_BAR){
+            setHealthBar(getHealthBar()+addHealth);
+            if(getHealthBar()>MAX_HEALTH_BAR){
+                setHealthBar(40);
+            }
+        }
+
     }
 }
