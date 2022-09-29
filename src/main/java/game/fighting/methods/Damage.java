@@ -1,4 +1,4 @@
-package game.commander;
+package game.fighting.methods;
 
 import game.character.Warrior;
 

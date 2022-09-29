@@ -1,6 +1,6 @@
 package game.character;
 
-import game.commander.Damage;
+import game.character.characteristic.HasAttack;
 
 public class Defender extends Warrior{
     private static final int DEFENSE = 2;
@@ -8,14 +8,13 @@ public class Defender extends Warrior{
     public Defender() {
        super(60,3);
     }
-
-    @Override
-    protected int receiveDamage(Damage damage) {
-         if( damage.getValue() - DEFENSE > 0){
-             damage.setValue(damage.getValue()-DEFENSE);
-             return super.receiveDamage(damage);
-         }else {
-             return 0;
-         }
+    protected int getDefense(){
+        return DEFENSE;
     }
+    @Override
+    public void receiveDamage(HasAttack damager) {
+        int reduceDamage=Math.max(0,damager.getAttackDamage() - getDefense()  );
+        super.receiveDamage(() -> reduceDamage);
+    }
+
 }

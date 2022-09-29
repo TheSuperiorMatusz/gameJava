@@ -1,7 +1,6 @@
-package game.commander;
+package game.fighting.methods;
 
 import game.character.Warrior;
-import game.commander.Damage;
 
 public class SimpleDamage implements Damage {
     private int value;
