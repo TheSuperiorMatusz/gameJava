@@ -7,11 +7,15 @@ public class Battle {
    public static boolean fight(Warrior warrior1, Warrior warrior2){
        Warrior attacker = warrior1;
        Warrior defender = warrior2;
+       int i=1;
        while (attacker.isAlive()){
            attacker.hit(defender);
+           System.out.println(defender.getHealthBar() +"Runda"+ i);
+           i++;
            Warrior swap = attacker;
            attacker = defender;
            defender = swap;
+
        }
        return warrior1.isAlive();
    }
@@ -65,8 +69,9 @@ public class Battle {
 
             while (iterableFirstArmy.hasNext() && iterableSecondArmy.hasNext()) {
                 fight(iterableFirstArmy.next(), iterableSecondArmy.next());
-
             }
+            firstAmry.removeDeadBodies();
+            secondArmy.removeDeadBodies();
 
         }
     }

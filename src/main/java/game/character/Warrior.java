@@ -24,6 +24,7 @@ public class Warrior implements
         this.initialHealthBar=this.healthBar = healthBar;
     }
 
+
     @Override
     public void setHealthBar(int healthBar) {
         this.healthBar =Math.min(initialHealthBar,healthBar);
@@ -31,12 +32,12 @@ public class Warrior implements
 
     @Override
     public int getAttackDamage() {
-        return attackDamage;
+        return this.attackDamage;
     }
 
     @Override
     public int getHealthBar() {
-        return healthBar;
+        return this.healthBar;
     }
 
 

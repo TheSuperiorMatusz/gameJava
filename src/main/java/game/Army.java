@@ -99,8 +99,14 @@ public class Army implements Iterable<Warrior> {
         for (int i=0; i<quantity;i++){
             addToTail(factory.get());
         }
-
-
+    }
+    public void removeDeadBodies(){
+        var it = iterator();
+        while (it.hasNext()){
+            if(!it.next().isAlive()){
+                it.remove();
+            }
+        }
     }
     public Iterator<Warrior> firstAlive(){
         return new FirstAliveIterator();
@@ -131,6 +137,7 @@ public class Army implements Iterable<Warrior> {
 
     private class simpleIterator implements Iterator<Warrior>{
         Node cursor = head;
+        Node prev = null;
         @Override
         public boolean hasNext() {
             return cursor.next != head;
@@ -140,8 +147,18 @@ public class Army implements Iterable<Warrior> {
             if(!hasNext()){
                 throw new NoSuchElementException();
             }
+            prev = cursor;
             cursor = cursor.next;
-            return cursor;
+            return cursor.warrior;
+        }
+        @Override
+        public void remove() {
+            if(prev == null){
+                throw new IllegalStateException();
+            }
+            prev.next = cursor.next;
+            cursor = prev;
+            prev = null;
         }
     }
 
