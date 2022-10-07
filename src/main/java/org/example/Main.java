@@ -1,42 +1,50 @@
 package org.example;
 
-import game.Battle;
-import game.character.Vampire;
-import game.character.WarriorWithWeapon;
-import game.character.weapon.OddWeapon;
-import game.character.weapon.builder.WeaponShop;
-import game.character.weapon.predefined.Sword;
+import game.battlefield.location.Location;
+import game.battlefield.location.field.River;
+import game.battlefield.weather.Snow;
+import game.battlefield.weather.Sunny;
+import game.battlefield.weather.Windy;
 
 public class Main {
     public static void main(String[] args) {
-        var unit_1 = new WarriorWithWeapon();
-        var unit_2 = new Vampire();
-        WeaponShop weaponShop = new WeaponShop();
-        OddWeapon weapon1 = weaponShop.orderWeapon(-10,5,0,40,0);
-        Sword sword = new Sword();
-        unit_1.equipWeapon(weapon1);
-        unit_2.equipWeapon(sword);
-        var unit_3 = new Vampire();
-//        unit_2.hit(unit_1);
-        unit_3.hit(unit_1);
-        System.out.println(Battle.fight(unit_1,unit_3));
+        /*var myArmy = new Army();
+        myArmy.addUnits(WarLord::new, 1);
+        myArmy.addUnits(WarriorWithWeapon::new, 2);
+        myArmy.addUnits(Lancer::new, 2);
+        myArmy.addUnits(Healer::new, 2);
 
+        var enemyArmy = new Army();
+        enemyArmy.addUnits(WarLord::new, 3);
+        enemyArmy.addUnits(Vampire::new, 1);
+        enemyArmy.addUnits(Healer::new, 2);
+        enemyArmy.addUnits(Knight::new, 2);
+        var it = myArmy.firstAlive();
+        System.out.println();
+        while (it.hasNext()){
+            System.out.println(it.next().getAttackDamage());
 
-       /* var unit_3 = new Defender();
-        var unit_4 = new Lancer();
-        Shield shield=new Shield();
-        GreatAxe greatAxe = new GreatAxe();
-        unit_3.equipWeapon(shield);
-        unit_4.equipWeapon(greatAxe);
-        System.out.println(Battle.fight(unit_3,unit_4));
+        }
+        myArmy.moveUnits();
+        enemyArmy.moveUnits();
+        Battle.fight(myArmy, enemyArmy);*/
 
-        var unit_5 = new Healer();
-        var unit_6 = new Knight();
-        MagicWand magicWand = new MagicWand();
-        Katana katana = new Katana();
-        unit_5.equipWeapon(magicWand);
-        unit_6.equipWeapon(katana);
-        System.out.println(Battle.fight(unit_5,unit_6));
-*/
+        Location location = new Location();
+        location.newWeather(new Snow());
+        System.out.println(location.attackerBonus());
+        System.out.println(location.defenderBonus());
+        location.newWeather(new Windy());
+        System.out.println(location.attackerBonus());
+        System.out.println(location.defenderBonus());
+        Location location1 = new Location(new River());
+        System.out.println(location1.attackerBonus());
+        System.out.println(location1.defenderBonus());
+        location1.newWeather(new Sunny());
+        System.out.println(location1.attackerBonus());
+        System.out.println(location1.defenderBonus());
+        location1.newWeather(new Windy());
+        System.out.println(location1.attackerBonus());
+        System.out.println(location1.defenderBonus());
+
     }
 }

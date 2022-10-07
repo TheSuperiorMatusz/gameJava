@@ -6,30 +6,37 @@ import game.character.weapon.specyfication.WeaponBasicBonuses;
 public class WarriorWithWeapon extends Warrior {
     private Warrior warrior;
     private WeaponBasicBonuses weapon=null;
+    private  int maxHealthWithBonus;
 
     public WarriorWithWeapon() {
         this.warrior = new Warrior();
+        this.maxHealthWithBonus = warrior.getInitialHealthBar();
 
     }
-    protected WarriorWithWeapon(Warrior warrior, WeaponBasicBonuses weapon){
+    protected WarriorWithWeapon(int health,int attack){
+        this.warrior= new Warrior(health,attack);
+        this.maxHealthWithBonus = warrior.getInitialHealthBar();
+    }
+    private WarriorWithWeapon(Warrior warrior, WeaponBasicBonuses weapon){
         this.warrior=warrior;
         this.weapon=weapon;
-    }
-
-    public WarriorWithWeapon(int healthBar,int attackDamage) {
-        this.warrior = new Warrior(healthBar,attackDamage);
+        this.maxHealthWithBonus = Math.min(0,getBaseHealth()+getBonusHealth());
     }
 
     public void equipWeapon(WeaponBasicBonuses weapon) {
-        if (weapon != weapon) {
+        if (hasWeapon()) {
             Warrior warrior1 = this.warrior;
-            this.warrior = new WarriorWithWeapon(warrior1, weapon);
+            this.warrior = new WarriorWithWeapon(warrior1, this.weapon);
+            this.weapon=weapon;
         }else {
             this.weapon = weapon;
         }
     }
 
-    public WeaponBasicBonuses getWeapon() {
+    protected Warrior getWarrior(){
+        return warrior;
+    }
+    protected WeaponBasicBonuses getWeapon() {
         return weapon;
     }
     public int getBonusAttack(){
@@ -73,20 +80,19 @@ public class WarriorWithWeapon extends Warrior {
     }
     @Override
     public int getAttackDamage() {
-        return getBonusAttack()+getBaseAttack();
+        return getBonusAttack()+getBaseAttack() > 0 ? getBonusAttack()+getBaseAttack() : 0;
     }
-
     @Override
     public int getHealthBar() {
-        return getBaseHealth()+getBonusHealth();
+        return this.maxHealthWithBonus;
     }
     @Override
     public void setHealthBar(int healthBar) {
-        warrior.setHealthBar(healthBar);
+        this.maxHealthWithBonus = Math.min(getBonusHealth()+getBaseHealth(),healthBar);
     }
     @Override
     public void receiveDamage(HasAttack damager) {
-        warrior.receiveDamage(damager);
+        setHealthBar(getHealthBar()-damager.getAttackDamage());
     }
 
 }

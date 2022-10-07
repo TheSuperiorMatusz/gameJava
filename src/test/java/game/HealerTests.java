@@ -1,5 +1,7 @@
 package game;
 
+import game.army.Army;
+import game.battle.Battle;
 import game.character.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +18,7 @@ public class HealerTests {
     @ParameterizedTest
     @DisplayName("Battle between two armies with Lancers")
     @MethodSource("provideArmiesForBattle")
-    void testBattleBetweenTwoArmiesWithLancers(Army firstArmy,Army secondArmy,boolean expected){
+    void testBattleBetweenTwoArmiesWithLancers(Army firstArmy, Army secondArmy, boolean expected){
         boolean isAttackingArmyWinner = Battle.fight(firstArmy,secondArmy);
         assertEquals(expected,isAttackingArmyWinner);
     }
@@ -27,10 +29,10 @@ public class HealerTests {
         firstArmy.addUnits(Lancer::new,7);
         firstArmy.addUnits(Vampire::new,3);
         firstArmy.addUnits(Healer::new,1);
-        firstArmy.addUnits(Warrior::new,4);
+        firstArmy.addUnits(WarriorWithWeapon::new,4);
         firstArmy.addUnits(Healer::new,1);
         firstArmy.addUnits(Defender::new,2);
-        secondArmy.addUnits(Warrior::new,4);
+        secondArmy.addUnits(WarriorWithWeapon::new,4);
         secondArmy.addUnits(Defender::new,4);
         secondArmy.addUnits(Healer::new,1);
         secondArmy.addUnits(Healer::new,6);
@@ -38,12 +40,12 @@ public class HealerTests {
         Army thirdsArmy = new Army();
         Army fourthsArmy = new Army();
         thirdsArmy.addUnits(Lancer::new,1);
-        thirdsArmy.addUnits(Warrior::new,3);
+        thirdsArmy.addUnits(WarriorWithWeapon::new,3);
         thirdsArmy.addUnits(Healer::new,1);
-        thirdsArmy.addUnits(Warrior::new,4);
+        thirdsArmy.addUnits(WarriorWithWeapon::new,4);
         thirdsArmy.addUnits(Healer::new,1);
         thirdsArmy.addUnits(Knight::new,2);
-        fourthsArmy.addUnits(Warrior::new,4);
+        fourthsArmy.addUnits(WarriorWithWeapon::new,4);
         fourthsArmy.addUnits(Defender::new,4);
         fourthsArmy.addUnits(Healer::new,1);
         fourthsArmy.addUnits(Vampire::new,6);

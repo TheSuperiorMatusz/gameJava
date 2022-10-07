@@ -1,20 +1,31 @@
 package game.character;
 
 import game.character.characteristic.HasAttack;
-import game.character.weapon.specyfication.WeaponBasicBonuses;
-import game.character.weapon.specyfication.WeaponDefenseBonus;
+import game.character.characteristic.HasDefense;
+import game.character.characteristic.WeaponDefenceBonus;
 
-public class Defender extends WarriorWithWeapon{
+public class Defender extends WarriorWithWeapon implements WeaponDefenceBonus, HasDefense {
     private static final int DEFENSE = 2;
 
     public Defender() {
        super(60,3);
     }
-    protected int totalDefense(){
-        WeaponBasicBonuses weaponBonuses = getWeapon();
-        if(weaponBonuses instanceof WeaponDefenseBonus defenseBonus) {
-            return DEFENSE + defenseBonus.getDeffenseBonus();
+    Defender(int health, int attack){
+        super(health,attack);
+    }
+    public int bonusDefense(){
+        Warrior warrior = getWarrior();
+        if(warrior instanceof  WarriorWithWeapon warriorWithWeapon){
+            int res = defenseBonus(warriorWithWeapon.getWeapon()) + defenseBonus(getWeapon());
+            return res;
         }
+
+        if(hasWeapon()){
+            return defenseBonus(getWeapon());
+        }
+        return 0;
+    }
+    public int basicDefense(){
         return DEFENSE;
     }
 

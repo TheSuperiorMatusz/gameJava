@@ -1,5 +1,6 @@
-package game;
+package game.battle;
 
+import game.army.Army;
 import game.character.Warrior;
 
 public class Battle {
@@ -7,11 +8,8 @@ public class Battle {
    public static boolean fight(Warrior warrior1, Warrior warrior2){
        Warrior attacker = warrior1;
        Warrior defender = warrior2;
-       int i=1;
        while (attacker.isAlive()){
            attacker.hit(defender);
-           System.out.println(defender.getHealthBar() +"Runda"+ i);
-           i++;
            Warrior swap = attacker;
            attacker = defender;
            defender = swap;
@@ -75,4 +73,8 @@ public class Battle {
 
         }
     }
+   /* public static boolean weatherBattle(Location location
+            , Army firstArmy, Army secondArmy){
+
+    }*/
 }

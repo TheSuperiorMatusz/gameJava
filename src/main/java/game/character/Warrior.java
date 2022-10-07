@@ -9,7 +9,6 @@ public class Warrior implements
         HasHealthBar, CanReceiveDamage, HasAttack {
     private int healthBar;
     private final int attackDamage;
-
     public int getInitialHealthBar() {
         return initialHealthBar;
     }
@@ -17,6 +16,7 @@ public class Warrior implements
     private final int initialHealthBar;
     public Warrior() {
         this(50, 5);
+
     }
 
     protected Warrior(int healthBar, int attackDamege){

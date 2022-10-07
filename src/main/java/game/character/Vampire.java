@@ -1,21 +1,36 @@
 package game.character;
 
 import game.character.characteristic.CanReceiveDamage;
+import game.character.characteristic.WeaponVampireBonus;
 import game.character.characteristic.KnowsDamageDealt;
-import game.character.weapon.specyfication.WeaponBasicBonuses;
-import game.character.weapon.specyfication.WeaponVampirismBonus;
 
-public class Vampire extends WarriorWithWeapon implements KnowsDamageDealt {
+
+
+public class Vampire extends WarriorWithWeapon implements KnowsDamageDealt, WeaponVampireBonus {
     private static final int VAMPIRISM = 50;
     public Vampire() {
         super(40,4);
     }
-    private int totalVampirism(){
-        WeaponBasicBonuses weapon =getWeapon();
-        if(weapon instanceof WeaponVampirismBonus vampirismBonus){
-        return vampirismBonus.getVampirismBonus() + VAMPIRISM;
+    private int bonusVampirism(){
+        Warrior warrior = getWarrior();
+        if(warrior instanceof  WarriorWithWeapon warriorWithWeapon){
+            int res = vampirebonus(warriorWithWeapon.getWeapon()) + vampirebonus(getWeapon());
+            return res;
+        }
+        if(hasWeapon()){
+            return vampirebonus(getWeapon());
+        }
+        return 0;
     }
+    private int basicVampirism(){
+        Warrior warrior = getWarrior();
+        if(warrior instanceof  Vampire vampire){
+            return vampire.basicVampirism();
+        }
         return VAMPIRISM;
+    }
+    private int totalVampirism(){
+      return bonusVampirism()+basicVampirism();
     }
     @Override
     public void hit(CanReceiveDamage opponent) {
@@ -24,7 +39,6 @@ public class Vampire extends WarriorWithWeapon implements KnowsDamageDealt {
         final int  percent = 100;
         int addHealth =  damageDealt * totalVampirism() / percent;
         int minusAttakcBonus = getBonusAttack() * totalVampirism() / percent;
-        addHealth -= minusAttakcBonus;
         setHealthBar(getHealthBar() + addHealth);
         }
 

@@ -8,6 +8,7 @@ public class Lancer extends WarriorWithWeapon implements KnowsDamageDealt {
     private final static int PENETRATION= 50;
 
     public Lancer() {
+
         super(50,6);
     }
 

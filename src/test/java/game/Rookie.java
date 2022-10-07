@@ -1,8 +1,8 @@
 package game;
 
-import game.character.Warrior;
+import game.character.WarriorWithWeapon;
 
-public class Rookie extends Warrior {
+public class Rookie extends WarriorWithWeapon {
     @Override
     public int getAttackDamage() {
         return 1;
