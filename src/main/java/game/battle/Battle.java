@@ -1,6 +1,8 @@
 package game.battle;
 
 import game.army.Army;
+import game.army.ArmyWithLocation;
+import game.battlefield.location.Location;
 import game.character.Warrior;
 
 public class Battle {
@@ -43,6 +45,7 @@ public class Battle {
        }
    }*/
     public static boolean fight(Army army1, Army army2){
+
         var it1 = army1.firstAlive();
         var it2 = army2.firstAlive();
 
@@ -73,8 +76,16 @@ public class Battle {
 
         }
     }
-   /* public static boolean weatherBattle(Location location
+    public static boolean weatherBattle(Location location
             , Army firstArmy, Army secondArmy){
-
-    }*/
+        ArmyWithLocation attackingarmy = new ArmyWithLocation(firstArmy,true,location);
+        ArmyWithLocation defendingArmy = new ArmyWithLocation(secondArmy,false,location);
+       var attackingIterator = attackingarmy.iterator();
+        var defendingIterator = defendingArmy.iterator();
+        while (defendingIterator.hasNext() && attackingIterator.hasNext()){
+            System.out.println(attackingIterator.next().getAttackDamage() + "now bonuses");
+            System.out.println(defendingIterator.next().getAttackDamage());
+        }
+       return fight(attackingarmy.getArmy(),defendingArmy.getArmy());
+    }
 }

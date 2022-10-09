@@ -32,10 +32,9 @@ public class WarlordTest {
 
 // you can provide any other interface for testing the order
        assert myArmy.unitAtPosition(0).getClass() == Lancer.class;
-        assert myArmy.unitAtPosition(1).getClass() == Healer.class;
+       assert myArmy.unitAtPosition(1).getClass() == Healer.class;
 // negative index means from the last position, so -1 == last
-        System.out.println(myArmy.unitAtPosition(-1).getClass());
-        assert myArmy.unitAtPosition(-1).getClass() == WarLord.class;
+       assert myArmy.unitAtPosition(-1).getClass() == WarLord.class;
 
 
       assert enemyArmy.unitAtPosition(-1).getClass() == WarLord.class;

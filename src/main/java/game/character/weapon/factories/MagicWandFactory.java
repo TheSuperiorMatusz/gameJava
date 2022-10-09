@@ -1,4 +1,11 @@
 package game.character.weapon.factories;
 
-public class MagicWandFactory {
+import game.character.weapon.predefined.MagicWand;
+import game.character.weapon.predefined.specyfication.WeaponBasicBonuses;
+
+public class MagicWandFactory implements WeaponFactory{
+    @Override
+    public WeaponBasicBonuses createWeapon() {
+        return new MagicWand();
+    }
 }

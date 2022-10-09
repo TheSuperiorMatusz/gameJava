@@ -1,6 +1,6 @@
 package game.character.weapon.predefined;
 
-import game.character.weapon.specyfication.WeaponHealingBonus;
+import game.character.weapon.predefined.specyfication.WeaponHealingBonus;
 
 public class MagicWand implements WeaponHealingBonus {
     @Override

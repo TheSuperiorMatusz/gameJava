@@ -1,6 +1,6 @@
 package game.character.weapon;
 
-import game.character.weapon.specyfication.AllWeaponBonuses;
+import game.character.weapon.predefined.specyfication.AllWeaponBonuses;
 
 public class OddWeapon implements AllWeaponBonuses {
 

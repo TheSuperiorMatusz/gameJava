@@ -8,6 +8,6 @@ public class Windy implements WeatherBonuses {
 
     @Override
     public int defenderBonus() {
-        return -5;
+        return -1;
     }
 }

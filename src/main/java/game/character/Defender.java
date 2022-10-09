@@ -31,7 +31,7 @@ public class Defender extends WarriorWithWeapon implements WeaponDefenceBonus, H
 
     @Override
     public void receiveDamage(HasAttack damager) {
-        int reduceDamage=Math.max(0,damager.getAttackDamage() - totalDefense()  );
+        int reduceDamage=Math.max(0,damager.getAttackDamage() - totalDefense() );
         super.receiveDamage(() -> reduceDamage);
     }
 

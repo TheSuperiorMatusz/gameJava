@@ -9,7 +9,7 @@ import game.character.characteristic.KnowsDamageDealt;
 public class Vampire extends WarriorWithWeapon implements KnowsDamageDealt, WeaponVampireBonus {
     private static final int VAMPIRISM = 50;
     public Vampire() {
-        super(40,4);
+      super(40,4);
     }
     private int bonusVampirism(){
         Warrior warrior = getWarrior();
@@ -34,13 +34,11 @@ public class Vampire extends WarriorWithWeapon implements KnowsDamageDealt, Weap
     }
     @Override
     public void hit(CanReceiveDamage opponent) {
-
         int damageDealt = hitAndReportDamage(opponent);
         final int  percent = 100;
         int addHealth =  damageDealt * totalVampirism() / percent;
-        int minusAttakcBonus = getBonusAttack() * totalVampirism() / percent;
         setHealthBar(getHealthBar() + addHealth);
         }
 
-    }
+}
 

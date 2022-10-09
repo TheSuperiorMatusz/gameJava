@@ -3,11 +3,11 @@ package game.battlefield.location.field;
 public class River extends PlainField {
     @Override
     public int attackerBonus() {
-        return -15;
+        return -2;
     }
 
     @Override
     public int defenderBonus() {
-        return 20;
+        return 2;
     }
 }

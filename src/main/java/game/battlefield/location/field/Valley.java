@@ -3,11 +3,11 @@ package game.battlefield.location.field;
 public class Valley extends PlainField {
     @Override
     public int attackerBonus() {
-        return -5;
+        return -1;
     }
 
     @Override
     public int defenderBonus() {
-        return 8;
+        return 1;
     }
 }

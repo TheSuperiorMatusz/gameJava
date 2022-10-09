@@ -8,9 +8,14 @@ import game.character.characteristic.HasHealthBar;
 public class Warrior implements
         HasHealthBar, CanReceiveDamage, HasAttack {
     private int healthBar;
-    private final int attackDamage;
+
+    private int attackDamage;
     public int getInitialHealthBar() {
         return initialHealthBar;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage < 0 ? 0 : attackDamage;
     }
 
     private final int initialHealthBar;
@@ -19,7 +24,7 @@ public class Warrior implements
 
     }
 
-    protected Warrior(int healthBar, int attackDamege){
+    public Warrior(int healthBar, int attackDamege){
         this.attackDamage = attackDamege;
         this.initialHealthBar=this.healthBar = healthBar;
     }
@@ -29,6 +34,8 @@ public class Warrior implements
     public void setHealthBar(int healthBar) {
         this.healthBar =Math.min(initialHealthBar,healthBar);
     }
+
+
 
     @Override
     public int getAttackDamage() {

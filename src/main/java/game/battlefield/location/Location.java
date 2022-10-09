@@ -1,12 +1,13 @@
 package game.battlefield.location;
 
 import game.battlefield.location.field.PlainField;
+import game.battlefield.weather.Sunny;
 import game.battlefield.weather.WeatherBonuses;
 
 public class Location extends PlainField {
     private PlainField location;
     private WeatherBonuses weather=null;
-
+    private boolean isDay=true;
     public Location(){
         this.location= new PlainField();
     }
@@ -15,7 +16,18 @@ public class Location extends PlainField {
     }
     private Location(PlainField location,WeatherBonuses weatherBonuses){
             this.location=location;
-            this.weather = weatherBonuses;
+            if(isBonusWeatherSunny(weatherBonuses)) {
+                this.weather = weatherBonuses;
+            }else {
+                this.weather = null;
+            }
+    }
+    private boolean isBonusWeatherSunny(WeatherBonuses weather){
+
+        if(weather instanceof Sunny){
+                return isDay;
+        }
+        return false;
     }
     public void newWeather(WeatherBonuses weather){
         if(hasWeather()) {
@@ -59,7 +71,7 @@ public class Location extends PlainField {
 
     private int locationDefenderBonus(){
         if(location instanceof Location location) {
-            return location.defenderBonus();
+            return location.locationDefenderBonus();
         }
         return location.defenderBonus();
     }
@@ -78,6 +90,6 @@ public class Location extends PlainField {
 
     @Override
     public int defenderBonus() {
-        return locationDefenderBonus()+weatherDefenderBonus();
+        return locationDefenderBonus() + weatherDefenderBonus();
     }
 }

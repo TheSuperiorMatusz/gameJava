@@ -1,7 +1,7 @@
 package game.character.weapon.predefined;
 
-import game.character.weapon.specyfication.WeaponDefenseBonus;
-import game.character.weapon.specyfication.WeaponVampirismBonus;
+import game.character.weapon.predefined.specyfication.WeaponDefenseBonus;
+import game.character.weapon.predefined.specyfication.WeaponVampirismBonus;
 
 public class GreatAxe implements WeaponVampirismBonus, WeaponDefenseBonus {
     @Override

@@ -1,6 +1,6 @@
 package game.character.weapon.predefined;
 
-import game.character.weapon.specyfication.WeaponDefenseBonus;
+import game.character.weapon.predefined.specyfication.WeaponDefenseBonus;
 
 public class Shield implements WeaponDefenseBonus {
     @Override

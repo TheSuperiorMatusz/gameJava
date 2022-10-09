@@ -1,12 +1,14 @@
 package game.character;
 
 import game.character.characteristic.HasAttack;
-import game.character.weapon.specyfication.WeaponBasicBonuses;
+import game.character.weapon.predefined.specyfication.WeaponBasicBonuses;
 
 public class WarriorWithWeapon extends Warrior {
     private Warrior warrior;
     private WeaponBasicBonuses weapon=null;
     private  int maxHealthWithBonus;
+
+
 
     public WarriorWithWeapon() {
         this.warrior = new Warrior();

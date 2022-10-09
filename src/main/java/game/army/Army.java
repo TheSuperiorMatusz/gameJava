@@ -7,7 +7,7 @@ import game.character.WarriorWithWeapon;
 import game.character.characteristic.CanReceiveDamage;
 import game.character.characteristic.HasAttack;
 import game.character.characteristic.WarriorInArmy;
-import game.character.weapon.specyfication.WeaponBasicBonuses;
+import game.character.weapon.predefined.specyfication.WeaponBasicBonuses;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,7 +21,7 @@ public class Army implements Iterable<WarriorWithWeapon> {
     }
     private int size=0;
 
-    private  class Node
+    private class Node
             extends WarriorWithWeapon
             implements WarriorInArmy {
         WarriorWithWeapon warrior;
@@ -67,7 +67,10 @@ public class Army implements Iterable<WarriorWithWeapon> {
         public void equipWeapon(WeaponBasicBonuses weapon) {
             warrior.equipWeapon(weapon);
         }
-
+        @Override
+        public void setAttackDamage(int attackDamage){
+            warrior.setAttackDamage(attackDamage);
+        }
         public void healthUnit(Warrior wounded){
             if(next != head){
                 if (warrior instanceof Healer healer){
@@ -101,6 +104,7 @@ public class Army implements Iterable<WarriorWithWeapon> {
             tail = head;
         }
         head.next = head.next.next ;
+        size--;
     }
     private void addToTail(WarriorWithWeapon warrior){
         var node = new Node(warrior);
@@ -143,13 +147,11 @@ public class Army implements Iterable<WarriorWithWeapon> {
         }
     }
     private void removeAll() {
-        var it = iterator();
+        var it = firstAlive();
         while (it.hasNext()) {
-            if (it.next() instanceof WarriorWithWeapon) {
-                it.remove();
-            }
+          removeFromHead();
         }
-        tail=head;
+
     }
     private List toList(){
         var iterator = iterator();
@@ -185,26 +187,19 @@ public class Army implements Iterable<WarriorWithWeapon> {
         }
     private int position(int position){
         if(position<0){
-            System.out.println(position);
             position =position+size;
-            System.out.println(position);
         }
         return position;
     }
     public WarriorWithWeapon unitAtPosition(int position){
         position=position(position);
-        System.out.println(position);
         var unit = this.iterator();
         int i =0;
-        System.out.println(position);
         WarriorWithWeapon warrior=null;
         while (unit.hasNext() && i<=position) {
             warrior = unit.next();
-            System.out.println(warrior);
-            System.out.println(i);
             i++;
         }
-        System.out.println(warrior.getClass().getSimpleName());
         return warrior;
     }
 
@@ -217,11 +212,14 @@ public class Army implements Iterable<WarriorWithWeapon> {
             List<WarriorWithWeapon> lineup = specific_Units("Lancer");
             List<WarriorWithWeapon> others = attackers();
             lineup.addAll(others);
-            lineup.addAll(1, healers);
+            if(lineup.size()>=1){
+                lineup.addAll(1, healers);
+            }else {
+                lineup.addAll(healers);
+            }
             lineup.addAll(warlord);
             removeAll();
             for (int i = 0; i < lineup.size(); i++) {
-                lineup.get(i).getClass().getSimpleName();
                 addToTail(lineup.get(i));
             }
         }

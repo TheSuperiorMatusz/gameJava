@@ -1,7 +1,7 @@
 package game.character.characteristic;
 
-import game.character.weapon.specyfication.WeaponBasicBonuses;
-import game.character.weapon.specyfication.WeaponDefenseBonus;
+import game.character.weapon.predefined.specyfication.WeaponBasicBonuses;
+import game.character.weapon.predefined.specyfication.WeaponDefenseBonus;
 
 public interface WeaponDefenceBonus {
     default int defenseBonus(WeaponBasicBonuses weaponBasicBonuses){
